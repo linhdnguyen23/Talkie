@@ -1,13 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { googleLogout } from '@react-oauth/google';
 
 const Home = (props) => {
   const { loggedIn, email } = props
   const navigate = useNavigate()
+  const [ profile, setProfile ] = useState([]);
+
+
+  // log out function to log the user out of google and set the profile array to null
+  const logOut = () => {
+      googleLogout();
+      setProfile(null);
+  };
 
   const onButtonClick = () => {
-    // You'll update this function later
-  }
+
+};
 
   return (
     <div className="mainContainer">

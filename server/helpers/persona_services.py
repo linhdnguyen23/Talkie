@@ -9,6 +9,17 @@ from llama_stack_client.types.agent_create_params import (
     AgentConfig,
     AgentConfigToolSearchToolDefinition
 )
+from elevenlabs.client import AsyncElevenLabs
+
+eleven = AsyncElevenLabs(
+  api_key="sk_e15987640cffeb0e339b0717b33cc0eaef69dafe9620857b" # Defaults to ELEVEN_API_KEY
+)
+
+async def print_models() -> None:
+    models = await eleven.models.get_all()
+    print(models)
+
+asyncio.run(print_models())
 from termcolor import cprint
 
 load_dotenv()
