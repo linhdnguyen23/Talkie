@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Home from './home';
 import Login from './login';
+import { Navigate } from "react-router-dom";
+
 
 function App() {
 
-    const [ user, setUser ] = useState([]);
-    const [ profile, setProfile ] = useState([]);
+    const [ user, setUser ] = useState();
+    const [ profile, setProfile ] = useState();
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
@@ -33,9 +35,10 @@ function App() {
         [ user ]
     );
     if (user) {
-        return <Home></Home>;
+        return (<Navigate to="/home" replace={true} />)
+    } else {
+        return (<Navigate to="/login" replace={true} />)
     }
-    return <Login></Login>
 
   }
 export default App;
