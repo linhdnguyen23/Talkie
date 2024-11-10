@@ -9,8 +9,9 @@ function App() {
 
     const [ user, setUser ] = useState();
     const [ profile, setProfile ] = useState();
+    const loggedInUser = localStorage.getItem("user");
+
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
             setUser(foundUser);
@@ -34,7 +35,7 @@ function App() {
         },
         [ user ]
     );
-    if (user) {
+    if (loggedInUser) {
         return (<Navigate to="/home" replace={true} />)
     } else {
         return (<Navigate to="/login" replace={true} />)

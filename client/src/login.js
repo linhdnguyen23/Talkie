@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useGoogleLogin } from '@react-oauth/google';
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link, redirect } from "react-router-dom";
 
 const Login = (props) => {
   const [user, setUser] = useState()
@@ -21,7 +21,7 @@ const Login = (props) => {
   const loggedInUser = localStorage.getItem("user");
 
   if(loggedInUser){
-    <Link to="/home" state={loggedInUser} />;
+    redirect("/home");
   } else{
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center bg-gray-50 sm:px-4">
