@@ -2,9 +2,12 @@ from typing import Union
 import uvicorn
 from fastapi import FastAPI
 from api import endpoints
+from dotenv.main import load_dotenv
+load_dotenv()
 
 app = FastAPI()
 app.include_router(endpoints.router)
+app.message_history = []
 
 # def clean_top_characteristics(dp, top_n=15):
 #     # Iterate over each person in the dataset
@@ -25,5 +28,5 @@ app.include_router(endpoints.router)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8080)
-uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+uvicorn.run(app, host="0.0.0.0", port=8000)

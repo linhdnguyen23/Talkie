@@ -11,27 +11,31 @@ from llama_stack_client.types.agent_create_params import (
 )
 from elevenlabs.client import AsyncElevenLabs
 
-eleven = AsyncElevenLabs(
-  api_key="sk_e15987640cffeb0e339b0717b33cc0eaef69dafe9620857b" # Defaults to ELEVEN_API_KEY
-)
+# load_dotenv()
 
-async def print_models() -> None:
-    models = await eleven.models.get_all()
-    print(models)
+# eleven = AsyncElevenLabs(
+#   api_key=os.getenv(ELEVENLABS_API_KEY)
+# )
 
-asyncio.run(print_models())
+# async def print_models() -> None:
+#     models = await eleven.models.get_all()
+#     print(models)
+
+# asyncio.run(print_models())
 from termcolor import cprint
 
-load_dotenv()
-HOST = "localhost"  # Replace with your host
-PORT = 5000       # Replace with your port
+# llama_server_ip = os.getenv(LLAMA_STACK_SERVER)  # Replace with your host
+# llama_server_port = os.getenv(LLAMA_STACK_SERVER_PORT)       # Replace with your port
+llama_server_ip = "localhost"  # Replace with your host
+llama_server_port = 5000       # Replace with your port
 
-client = LlamaStackClient(base_url=f'http://{HOST}:{PORT}')
+client = LlamaStackClient(base_url=f'http://{llama_server_ip}:{llama_server_port}')
 
 async def start_conversation(user_id: int, persona: str = ''):
     conversation_history = []
     in_messages = []
     # TODO: not used at the moment
+    print("In select schema")
     persona = "Dr. Seuss"
     set_system_persona = {"role": "system", "content": f"You are speaking as {persona}. Based on what you know about this person, respond to the following question: [User question]"}
     # set_system_persona = {"role": "system", "content": f"You are {persona} who gives helpful advices."}
