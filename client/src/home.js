@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import { useNavigate } from 'react-router-dom'
 import { googleLogout } from '@react-oauth/google';
 
 const Home = (props) => {
   const { loggedIn, email } = props
-  const navigate = useNavigate()
   const [ profile, setProfile ] = useState([]);
 
 
