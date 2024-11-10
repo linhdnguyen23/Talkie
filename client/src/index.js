@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Login from './login';
 import Home from './home';
+import Chat from './chat';
 
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home/>,
+    element: <Chat/>,
   },
 ]);
 
