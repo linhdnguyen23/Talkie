@@ -48,9 +48,17 @@ in_messages = []
 
 async def start_conversation_with(user_id: int, persona: str = ''):
     # TODO: not used at the moment
-    set_system_persona = {"role": "system", "content": f"You are speaking as {persona}. Based on what you know about this person, respond to the following question: [User question]. Try to be concise and limit your response to 50 words max. If the question is in a different language, respond in that language."}
+    set_system_persona = {"role": "system", "content": f"You are speaking as {persona}. Based on what you know about this person, respond to the following question: [User question]. Try to be concise and limit your response to 50 words max. If the question is in a different language, respond in that language. But first, confirm to the user that you're who you are in the first response."}
     # set_system_persona = {"role": "system", "content": f"You are {persona} who gives helpful advices."}
     in_messages.append(set_system_persona)
+    message = {"role": "user", "content": "Hi"}
+    in_messages.append(message)
+    response = client.inference.chat_completion(
+        messages=in_messages,
+        model='Llama3.2-3B-Instruct',
+    )
+    resp = response.completion_message.content
+    cprint(f'> {persona}: {resp}', 'cyan')
 
 def chat():
     # few_shot_examples = [
@@ -228,11 +236,11 @@ if __name__ == "__main__":
         user_input = input('User> ')
         if is_valid_person_name(user_input):
             persona = user_input.title()
-            cprint(f"> Aha, I'm {persona}", 'cyan')
+            # cprint(f"> Aha, I'm {persona}", 'cyan')
             asyncio.run(start_conversation_with(1, persona))
             break
         if i == 3:
-            cprint(f"> Seems like you can't make up your mind. I'll be {persona.title()}", 'cyan')
+            # cprint(f"> Seems like you can't make up your mind. I'll be {persona.title()}", 'cyan')
             asyncio.run(start_conversation_with(1, persona))
     chat()
 
